@@ -1,11 +1,16 @@
-<% @users.each do |user| %>
+<% if flash[:success] %>
+  <div class="alert alert-success">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
+<p>画像</p>
+  <%= image_tag @user.get_profile_image(100,100) %>
+
+  <% @users.each do |user| %>
   <div>
     <%= link_to user_path(user.id) do %>
-    <% if user.image.attached? %>
-      <%= image_tag url_for(user.image) %>
-    <% else %>
-      <%= image_tag 'no_image.jpg' %>
-    <% end %>
+    <%= image_tag user.get_profile_image(100,100) %>
     <% end %>
   </div>
 <% end %>

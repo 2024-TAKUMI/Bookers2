@@ -1,2 +1,11 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h1>User info</h1>
+
+<%= form_for @user, url: { action: "update" } do |f| %>
+  <%= f.label :name, "名前" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :introduction, "Introduction" %>
+  <%= f.email_field :introduction %>
+
+  <%= f.submit "更新" %>
+<% end %>
