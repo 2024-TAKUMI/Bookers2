@@ -22,12 +22,29 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @user = @book.user
+    @new = Book.new
   end
 
   def edit
+    @book = Book.find(params[:id])
   end
 
   def update
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
+      flash[:success] = "Book was successfully updated."
+      redirect_to book_path(@book)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
+    flash[:notice] = "本当に消しますか？."
+    redirect_to books_path
   end
 
   def correct_user
@@ -40,7 +57,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:image, :title, :caption)
+    params.require(:book).permit(:image, :title, :body)
   end
 
 end

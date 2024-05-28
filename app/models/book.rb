@@ -1,8 +1,9 @@
 class Book < ApplicationRecord
 
   validates :title, presence: true
-  validates :caption, presence: true, length: { maximum: 200 }
+  validates :body, presence: true, length: { maximum: 200 }
 
   has_one_attached :image
 
+  belongs_to :user
 end
